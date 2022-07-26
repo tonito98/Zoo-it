@@ -1,1 +1,1 @@
-web: node zookeeper/server.js
+web: node server.js
