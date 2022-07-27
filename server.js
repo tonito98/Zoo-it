@@ -51,7 +51,7 @@ function findById(id, animalsArray) {
     return result;
 }
 
-// This reroutes the user to api root
+// This reroutes the user to the api root
 app.get('/', (req, res) => {
     res.redirect('/api/animals');
 });
