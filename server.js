@@ -7,6 +7,11 @@ const { animals } = require('./data/animals.json')
 const PORT = process.env.PORT || 3001;
 const app = express();
 
+// By providing the file path location of public
+// we instruct the server to make these files static.
+//So all the front-end code can be accessed without 
+// having a specific server endpoint created for it!
+app.use(express.static('public'));
 // parse incoming string or array data
 app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON data
@@ -96,9 +101,9 @@ function validateAnimal(animal) {
 }
 
 // This reroutes the user to the api root
-app.get('/', (req, res) => {
-    res.redirect('/api/animals');
-});
+// app.get('/', (req, res) => {
+//     res.redirect('/api/animals');
+// });
 
 app.get("/api/animals", (req, res) => {
     let results = animals;
@@ -135,6 +140,23 @@ app.post('/api/animals', (req, res) => {
     }
 });
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+app.get('/animals', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/animals.html'));
+});
+
+app.get('/zookeepers', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/zookeepers.html'));
+});
+
+//Wildcard route in care a client makes a request
+// for a non-existent route, they will be rerouted to the index.html
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
 
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
