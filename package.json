@@ -20,5 +20,11 @@
   "homepage": "https://github.com/tonito98/zookeeper#readme",
   "dependencies": {
     "express": "^4.18.1"
-  }
+  },
+  "devDependencies": {
+    "jest": "^28.1.3"
+  },
+    "scripts": {
+      "test": "jest"
+    }
 }
